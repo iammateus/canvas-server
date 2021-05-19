@@ -1,28 +1,30 @@
 const { server, io } = require("../../app/server");
 const Client = require("socket.io-client");
+const state = require("../../app/state");
+jest.mock("../../app/state");
 
 describe("my beautiful app", () => {
-    let clientSocket;
+    let client;
 
     beforeAll((done) => {
         server.listen(() => {
             const port = server.address().port;
             console.log({ port });
-            clientSocket = new Client(`http://localhost:${port}`);
-            clientSocket.on("connect", done);
+            client = new Client(`http://localhost:${port}`);
+            client.on("connect", done);
         });
     });
 
     afterAll(() => {
         io.close();
-        clientSocket.close();
+        client.close();
     });
 
-    it("should emit response event when message event is received", (done) => {
-        clientSocket.on("response", (arg) => {
-            expect(arg).toBe("The message was received");
+    it('should call the correct handler to event "state"', (done) => {
+        client.emit("state", {});
+        setTimeout(() => {
+            expect(state.state.mock.calls.length).toEqual(1);
             done();
-        });
-        clientSocket.emit("message", "Hello");
+        }, 500);
     });
 });

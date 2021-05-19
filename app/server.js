@@ -10,9 +10,6 @@ const io = require("socket.io")(server, {
 io.on("connection", (client) => {
     client.on("state", state.bind(null, client));
 
-    client.on("message", (data) => {
-        client.emit("response", "The message was received");
-    });
     client.on("disconnect", () => {
         /* … */
     });
