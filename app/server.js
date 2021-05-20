@@ -1,5 +1,5 @@
 const server = require("http").createServer();
-const { state } = require("./state");
+const { state } = require("./controllers/state");
 
 const io = require("socket.io")(server, {
     cors: {
@@ -8,7 +8,9 @@ const io = require("socket.io")(server, {
 });
 
 io.on("connection", (client) => {
-    client.on("state", state.bind(null, client));
+    client.on("state", (data) => {
+        state(client, data);
+    });
 
     client.on("disconnect", () => {
         /* … */
