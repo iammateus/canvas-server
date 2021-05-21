@@ -4,7 +4,7 @@ The multiplayer server of the project [Canvas](https://github.com/iammateus/Canv
 
 ## Requeriments
 
-- [Docker](https://docs.docker.com/)
+-   [Docker](https://docs.docker.com/)
 
 ## Installation
 
@@ -22,7 +22,8 @@ Run all with html report
 
 Run a specific test
 
-    $ yarn test-search -- "<describeString> <itString>"
-    
+    $ yarn test-search "<describeString> <itString>"
+
 ## License
+
 [MIT](https://github.com/iammateus/canvas-server/blob/main/LICENSE)
