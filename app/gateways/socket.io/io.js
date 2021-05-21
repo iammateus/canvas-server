@@ -1,5 +1,4 @@
 const socket = require("socket.io");
-const { ws } = require("../../ports/ws");
 
 function initSocket(server, ws) {
   const io = socket(server, {
@@ -13,7 +12,7 @@ function initSocket(server, ws) {
   return io;
 }
 
-function handleIO(io) {
+function handleIO(io, ws) {
   const listenerCallback = (client) => (fn) => (data) => fn(client, data);
 
   io.on("connection", (client) => {
