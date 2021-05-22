@@ -1,27 +1,27 @@
 const socket = require("socket.io");
 
 function initSocket(server, ws) {
-  const io = socket(server, {
-    cors: {
-      origin: "*",
-    },
-  });
+    const io = socket(server, {
+        cors: {
+            origin: "*",
+        },
+    });
 
-  handleIO(io, ws);
+    handleIO(io, ws);
 
-  return io;
+    return io;
 }
 
 function handleIO(io, ws) {
-  const listenerCallback = (client) => (fn) => (data) => fn(client, data);
+    const listenerCallback = (client) => (fn) => (data) => fn(client, data);
 
-  io.on("connection", (client) => {
-    ws(listenerCallback(client)).map((WS) => {
-      client.on(WS.event, WS.handler);
+    io.on("connection", (client) => {
+        ws(listenerCallback(client)).map((WS) => {
+            client.on(WS.event, WS.handler);
+        });
     });
-  });
 }
 
 module.exports = {
-  initSocket,
+    initSocket,
 };
