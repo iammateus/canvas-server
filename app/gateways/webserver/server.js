@@ -1,8 +1,8 @@
 const { createServer } = require("http");
 
-function initServer() {
+const initServer = () => {
   return createServer();
-}
+};
 
 module.exports = {
   initServer,
