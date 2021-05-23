@@ -2,6 +2,8 @@
 
 The multiplayer server of the project [Canvas](https://github.com/iammateus/Canvas).
 
+This application uses WebSockets to provide real-time communication between clients.
+
 ## Requeriments
 
 -   [Docker](https://docs.docker.com/)
