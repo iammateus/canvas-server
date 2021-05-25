@@ -1,9 +1,9 @@
 const { createServer } = require("http");
 
-function initServer() {
-    return createServer();
-}
+const initServer = () => {
+  return createServer();
+};
 
 module.exports = {
-    initServer,
+  initServer,
 };
