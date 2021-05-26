@@ -1,7 +1,7 @@
 const ClientSocketRepository = (client) => ({
-  emitBroadcast(event, state) {
-    return client.broadcast.emit(event, state);
-  },
+    emitBroadcast(event, state) {
+        return client.broadcast.emit(event, state);
+    },
 });
 
-module.exports = { ClientSocketRepository };
+module.exports = ClientSocketRepository;

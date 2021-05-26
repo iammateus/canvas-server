@@ -1,8 +1,10 @@
+const faker = require("faker");
 const { server, io } = require("../../app/init");
 const Client = require("socket.io-client");
 const state = require("../../app/controllers/state");
 jest.mock("../../app/controllers/state");
-const faker = require("faker");
+const ClientSocketRepository = require("../../app/repositories/gateways/socket.io/ClientSocketRepository");
+jest.mock("../../app/repositories/gateways/socket.io/ClientSocketRepository");
 
 describe("my beautiful app", () => {
     let client;
@@ -22,13 +24,14 @@ describe("my beautiful app", () => {
 
     it('should call the correct handler to event "state"', (done) => {
         const data = { [faker.lorem.word()]: faker.lorem.word() };
+        const mockedRepo = { [faker.lorem.word()]: faker.lorem.word() };
+        ClientSocketRepository.mockReturnValueOnce(mockedRepo);
+
         client.emit("state", data);
 
         setTimeout(() => {
             expect(state.state.mock.calls.length).toEqual(1);
-            expect(state.state.mock.calls[0][0].constructor.name).toEqual(
-                "Socket"
-            );
+            expect(state.state.mock.calls[0][0]).toMatchObject(mockedRepo);
             expect(state.state.mock.calls[0][1]).toMatchObject(data);
             done();
         }, 2000);
