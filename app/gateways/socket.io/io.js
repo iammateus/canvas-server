@@ -3,7 +3,7 @@ const ClientSocketRepository = require("../../repositories/gateways/socket.io/Cl
 
 const handleIO = (io, ws) => {
     const listenerCallback = (client) => (fn) => (data) =>
-        fn(ClientSocketRepository(client), data);
+        fn(new ClientSocketRepository(client), data);
 
     io.on("connection", (client) => {
         ws(listenerCallback(client)).map((WS) => {
