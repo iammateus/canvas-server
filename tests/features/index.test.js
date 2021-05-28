@@ -1,4 +1,3 @@
-const faker = require("faker");
 const { server, io } = require("../../app/init");
 const Client = require("socket.io-client");
 
