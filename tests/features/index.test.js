@@ -1,7 +1,7 @@
 const Client = require("socket.io-client");
 
-const state = require("../../app/controllers/state");
-jest.mock("../../app/controllers/state");
+const StateController = require("../../app/controllers/StateController");
+jest.mock("../../app/controllers/StateController");
 
 const ClientSocketRepository = require("../../app/repositories/gateways/socket.io/ClientSocketRepository");
 
@@ -32,10 +32,10 @@ describe("my beautiful app", () => {
         client.emit("state", data);
 
         setTimeout(() => {
-            expect(state.state.mock.calls.length).toEqual(1);
+            expect(StateController.state.mock.calls.length).toEqual(1);
 
-            const firstArg = state.state.mock.calls[0][0];
-            const secondArg = state.state.mock.calls[0][1];
+            const firstArg = StateController.state.mock.calls[0][0];
+            const secondArg = StateController.state.mock.calls[0][1];
 
             expect(firstArg).toBeInstanceOf(ClientSocketRepository);
             expect(firstArg.client.id).toEqual(client.id);

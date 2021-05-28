@@ -1,9 +1,9 @@
-const { state } = require("../controllers/state");
+const StateController = require("../controllers/StateController");
 
 const ws = [
     {
         event: "state",
-        handler: state,
+        handler: StateController.state,
     },
 ];
 

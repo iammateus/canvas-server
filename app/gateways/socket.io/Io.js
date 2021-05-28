@@ -18,11 +18,9 @@ class Io {
         io.on("connection", (client) => {
             const clientSocketRepository = new ClientSocketRepository(client);
             ws.map((WS) => {
-                client.on(
-                    WS.event,
-                    async (data) =>
-                        await WS.handler(clientSocketRepository, data)
-                );
+                client.on(WS.event, async (data) => {
+                    await WS.handler(clientSocketRepository, data);
+                });
             });
         });
     }
