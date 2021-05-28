@@ -1,3 +1,5 @@
-const { server } = require("./app/init");
+const SocketServer = require("./app/SocketServer");
 
-server.listen(3000);
+const socketServer = new SocketServer();
+
+socketServer.server.listen(3000);

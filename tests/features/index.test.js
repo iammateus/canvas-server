@@ -1,4 +1,3 @@
-const { server, io } = require("../../app/init");
 const Client = require("socket.io-client");
 
 const state = require("../../app/controllers/state");
@@ -7,6 +6,9 @@ jest.mock("../../app/controllers/state");
 const mockObject = require("../mocks/object.mock");
 
 const ClientSocketRepository = require("../../app/repositories/gateways/socket.io/ClientSocketRepository");
+
+const SocketServer = require("../../app/SocketServer");
+const { server, io } = new SocketServer();
 
 describe("my beautiful app", () => {
     let client;
@@ -34,6 +36,7 @@ describe("my beautiful app", () => {
             expect(state.state.mock.calls[0][0]).toBeInstanceOf(
                 ClientSocketRepository
             );
+            expect(state.state.mock.calls[0][0].client.id).toEqual(client.id);
             expect(state.state.mock.calls[0][1]).toMatchObject(data);
             done();
         }, 2000);

@@ -1,9 +1,9 @@
 const { state } = require("../controllers/state");
 
-const ws = (callback) => [
+const ws = [
     {
         event: "state",
-        handler: callback(state),
+        handler: state,
     },
 ];
 
