@@ -1,8 +1,8 @@
 # Canvas Server
 
-The multiplayer server of the project [Canvas](https://github.com/iammateus/Canvas).
+Multiplayer server of [Canvas App](https://github.com/iammateus/Canvas).
 
-This application uses WebSockets to provide real-time communication between clients. This communication enables users to draw collaboratively.
+This application uses WebSockets to provide real-time communication between its clients. This communication enables users to draw collaboratively in a canvas.
 
 ## Requeriments
 
