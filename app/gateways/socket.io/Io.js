@@ -3,11 +3,13 @@ const ClientSocketRepository = require("../../repositories/gateways/socket.io/Cl
 
 class Io {
     static initSocket(server, ws) {
-        const io = socket(server, {
+        const config = {
             cors: {
                 origin: "*",
             },
-        });
+        };
+
+        const io = socket(server, config);
 
         this.handleIO(io, ws);
 
@@ -17,7 +19,7 @@ class Io {
     static handleIO(io, ws) {
         io.on("connection", (client) => {
             const clientSocketRepository = new ClientSocketRepository(client);
-            ws.map((WS) => {
+            ws.forEach((WS) => {
                 client.on(WS.event, async (data) => {
                     await WS.handler(clientSocketRepository, data);
                 });
