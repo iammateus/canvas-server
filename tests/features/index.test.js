@@ -41,6 +41,6 @@ describe("my beautiful app", () => {
             expect(firstArg.client.id).toEqual(client.id);
             expect(secondArg).toMatchObject(data);
             done();
-        }, 2000);
+        }, 100);
     });
 });
