@@ -3,8 +3,8 @@ class ClientSocketRepository {
         this.client = client;
     }
 
-    emitBroadcast(event, state) {
-        return this.client.broadcast.emit(event, state);
+    emitBroadcast(event, data) {
+        return this.client.broadcast.emit(event, data);
     }
 }
 
