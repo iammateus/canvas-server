@@ -1,7 +1,11 @@
+#!/bin/bash
+
 echo 'Initializing application'
+
+echo 'Installing dependences...'
 yarn install
 
-if [ ! -f ".env" ]; then
+if [[ ! -f ".env" ]]; then
     echo 'Copying .env.dev to .env'
     cp .env.dev .env
 fi
