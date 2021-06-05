@@ -1,7 +1,11 @@
+const faker = require("faker");
 const Client = require("socket.io-client");
 
 const StateController = require("../../app/controllers/StateController");
 jest.mock("../../app/controllers/StateController");
+
+const RoomController = require("../../app/controllers/RoomController");
+jest.mock("../../app/controllers/RoomController");
 
 const ClientSocketRepository = require("../../app/repositories/gateways/socket.io/ClientSocketRepository");
 
@@ -40,6 +44,23 @@ describe("my beautiful app", () => {
             expect(firstArg).toBeInstanceOf(ClientSocketRepository);
             expect(firstArg.client.id).toEqual(client.id);
             expect(secondArg).toMatchObject(data);
+            done();
+        }, 100);
+    });
+
+    it('should call correct handler for event "room" with correct params', (done) => {
+        const roomName = faker.lorem.word();
+        client.emit("room", roomName);
+
+        setTimeout(() => {
+            expect(RoomController.join.mock.calls.length).toEqual(1);
+
+            const firstArg = RoomController.join.mock.calls[0][0];
+            const secondArg = RoomController.join.mock.calls[0][1];
+
+            expect(firstArg).toBeInstanceOf(ClientSocketRepository);
+            expect(firstArg.client.id).toEqual(client.id);
+            expect(secondArg).toEqual(roomName);
             done();
         }, 100);
     });
