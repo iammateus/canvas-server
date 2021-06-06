@@ -30,7 +30,7 @@ describe("my beautiful app", () => {
         client.close();
     });
 
-    it('should call correct handler for event "state" with correct params', (done) => {
+    it("should call correct handler for event", (done) => {
         const data = mockObject();
 
         client.emit("state", data);
