@@ -1,23 +1,30 @@
 const faker = require("faker");
 const Client = require("socket.io-client");
 
-const StateController = require("../../app/controllers/StateController");
-jest.mock("../../app/controllers/StateController");
-
-const RoomController = require("../../app/controllers/RoomController");
-jest.mock("../../app/controllers/RoomController");
+const WS = require("../../app/ports/WS");
+jest.mock("../../app/ports/WS");
 
 const ClientSocketRepository = require("../../app/repositories/gateways/socket.io/ClientSocketRepository");
 
 const SocketServer = require("../../app/SocketServer");
-const { server, io } = new SocketServer();
 
 const mockObject = require("../mocks/object.mock");
 
 describe("my beautiful app", () => {
     let client;
+    let eventName;
+    let eventHandler;
 
     beforeAll((done) => {
+        // Mock event and its handler
+        eventName = faker.lorem.word();
+        eventHandler = jest.fn();
+        WS.getEventHandlers.mockReturnValueOnce([
+            { event: eventName, handler: eventHandler },
+        ]);
+
+        // Init socket server
+        const { server, io } = new SocketServer();
         server.listen(() => {
             const port = server.address().port;
             client = new Client(`http://localhost:${port}`);
@@ -30,16 +37,16 @@ describe("my beautiful app", () => {
         client.close();
     });
 
-    it("should call correct handler for event", (done) => {
+    it("should call correct handler for event with right params (object)", (done) => {
         const data = mockObject();
 
-        client.emit("state", data);
+        client.emit(eventName, data);
 
         setTimeout(() => {
-            expect(StateController.state.mock.calls.length).toEqual(1);
+            expect(eventHandler.mock.calls.length).toEqual(1);
 
-            const firstArg = StateController.state.mock.calls[0][0];
-            const secondArg = StateController.state.mock.calls[0][1];
+            const firstArg = eventHandler.mock.calls[0][0];
+            const secondArg = eventHandler.mock.calls[0][1];
 
             expect(firstArg).toBeInstanceOf(ClientSocketRepository);
             expect(firstArg.client.id).toEqual(client.id);
@@ -48,19 +55,20 @@ describe("my beautiful app", () => {
         }, 100);
     });
 
-    it('should call correct handler for event "room" with correct params', (done) => {
-        const roomName = faker.lorem.word();
-        client.emit("room", roomName);
+    it("should call correct handler for event with right params (string)", (done) => {
+        const data = faker.lorem.word();
+
+        client.emit(eventName, data);
 
         setTimeout(() => {
-            expect(RoomController.join.mock.calls.length).toEqual(1);
+            expect(eventHandler.mock.calls.length).toEqual(2);
 
-            const firstArg = RoomController.join.mock.calls[0][0];
-            const secondArg = RoomController.join.mock.calls[0][1];
+            const firstArg = eventHandler.mock.calls[1][0];
+            const secondArg = eventHandler.mock.calls[1][1];
 
             expect(firstArg).toBeInstanceOf(ClientSocketRepository);
             expect(firstArg.client.id).toEqual(client.id);
-            expect(secondArg).toEqual(roomName);
+            expect(secondArg).toEqual(data);
             done();
         }, 100);
     });
