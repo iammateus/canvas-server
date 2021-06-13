@@ -1,4 +1,4 @@
-const { createServer } = require("http");
+const { createServer } = require('http');
 
 class WebServer {
     static initServer() {

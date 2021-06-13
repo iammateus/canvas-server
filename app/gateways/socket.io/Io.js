@@ -1,11 +1,11 @@
-const socket = require("socket.io");
-const ClientSocketRepository = require("../../repositories/gateways/socket.io/ClientSocketRepository");
+const socket = require('socket.io');
+const ClientSocketRepository = require('../../repositories/gateways/socket.io/ClientSocketRepository');
 
 class Io {
     static initSocket(server, eventHandlers) {
         const config = {
             cors: {
-                origin: "*",
+                origin: '*',
             },
         };
 
@@ -17,7 +17,7 @@ class Io {
     }
 
     static handleIO(io, eventHandlers) {
-        io.on("connection", (client) => {
+        io.on('connection', (client) => {
             const clientSocketRepository = new ClientSocketRepository(client);
             eventHandlers.forEach((eventHandler) => {
                 client.on(eventHandler.event, async (data) => {

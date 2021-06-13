@@ -1,7 +1,5 @@
-const faker = require("faker");
+const faker = require('faker');
 
-const mock = () => {
-    return { [faker.lorem.word()]: faker.lorem.word() };
-};
+const mock = () => ({ [faker.lorem.word()]: faker.lorem.word() });
 
 module.exports = mock;

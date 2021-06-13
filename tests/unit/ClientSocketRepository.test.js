@@ -1,14 +1,14 @@
-const ClientSocketRepository = require("../../app/repositories/gateways/socket.io/ClientSocketRepository");
-const faker = require("faker");
-const mockObject = require("../mocks/object.mock");
+const faker = require('faker');
+const ClientSocketRepository = require('../../app/repositories/gateways/socket.io/ClientSocketRepository');
+const mockObject = require('../mocks/object.mock');
 
-describe("ClientSocketRepository.emitBroadcast", () => {
-    it("should be a function", () => {
+describe('ClientSocketRepository.emitBroadcast', () => {
+    it('should be a function', () => {
         const clientSocketRepository = new ClientSocketRepository();
         expect(clientSocketRepository.emitBroadcast).toBeInstanceOf(Function);
     });
 
-    it("should be a function", () => {
+    it('should emit an event using socket.io client', () => {
         const client = {
             broadcast: {
                 emit: jest.fn(),

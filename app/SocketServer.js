@@ -1,6 +1,6 @@
-const WebServer = require("./gateways/webserver/WebServer");
-const Io = require("./gateways/socket.io/Io");
-const WS = require("./ports/WS");
+const WebServer = require('./gateways/webserver/WebServer');
+const Io = require('./gateways/socket.io/Io');
+const WS = require('./ports/WS');
 
 class SocketServer {
     constructor() {

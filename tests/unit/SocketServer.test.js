@@ -1,21 +1,23 @@
-const faker = require("faker");
-const Client = require("socket.io-client");
+const faker = require('faker');
+const Client = require('socket.io-client');
 
-const WS = require("../../app/ports/WS");
-jest.mock("../../app/ports/WS");
+const WS = require('../../app/ports/WS');
 
-const ClientSocketRepository = require("../../app/repositories/gateways/socket.io/ClientSocketRepository");
+jest.mock('../../app/ports/WS');
 
-const SocketServer = require("../../app/SocketServer");
+const ClientSocketRepository = require('../../app/repositories/gateways/socket.io/ClientSocketRepository');
 
-const mockObject = require("../mocks/object.mock");
+const SocketServer = require('../../app/SocketServer');
 
-describe("my beautiful app", () => {
+const mockObject = require('../mocks/object.mock');
+
+describe('my beautiful app', () => {
     let client;
     let eventName;
     let eventHandler;
+    let socketServer;
 
-    beforeAll((done) => {
+    beforeAll(() => new Promise((done) => {
         // Mock event and its handler
         eventName = faker.lorem.word();
         eventHandler = jest.fn();
@@ -24,20 +26,21 @@ describe("my beautiful app", () => {
         ]);
 
         // Init socket server
-        const { server, io } = new SocketServer();
-        server.listen(() => {
-            const port = server.address().port;
+        socketServer = new SocketServer();
+
+        socketServer.server.listen(() => {
+            const { port } = socketServer.server.address();
             client = new Client(`http://localhost:${port}`);
-            client.on("connect", done);
+            client.on('connect', done);
         });
-    });
+    }));
 
     afterAll(() => {
-        io.close();
+        socketServer.io.close();
         client.close();
     });
 
-    it("should call correct handler for event with right params (object)", (done) => {
+    it('should call correct handler for event with right params (object)', () => new Promise((done) => {
         const data = mockObject();
 
         client.emit(eventName, data);
@@ -53,9 +56,9 @@ describe("my beautiful app", () => {
             expect(secondArg).toMatchObject(data);
             done();
         }, 100);
-    });
+    }));
 
-    it("should call correct handler for event with right params (string)", (done) => {
+    it('should call correct handler for event with right params (string)', () => new Promise((done) => {
         const data = faker.lorem.word();
 
         client.emit(eventName, data);
@@ -71,5 +74,5 @@ describe("my beautiful app", () => {
             expect(secondArg).toEqual(data);
             done();
         }, 100);
-    });
+    }));
 });

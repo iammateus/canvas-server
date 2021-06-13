@@ -1,14 +1,15 @@
-const StateController = require("../../app/controllers/StateController");
-const ClientSocketRepository = require("../../app/repositories/gateways/socket.io/ClientSocketRepository");
-jest.mock("../../app/repositories/gateways/socket.io/ClientSocketRepository");
-const mockObject = require("../mocks/object.mock");
+const StateController = require('../../app/controllers/StateController');
+const ClientSocketRepository = require('../../app/repositories/gateways/socket.io/ClientSocketRepository');
 
-describe("StateController.state", () => {
-    it("should be a function", () => {
+jest.mock('../../app/repositories/gateways/socket.io/ClientSocketRepository');
+const mockObject = require('../mocks/object.mock');
+
+describe('StateController.state', () => {
+    it('should be a function', () => {
         expect(StateController.state).toBeInstanceOf(Function);
     });
 
-    it("should be a function", () => {
+    it('should emit state event', () => {
         const client = new ClientSocketRepository();
         client.emitBroadcast.mockImplementationOnce(() => {});
         const state = mockObject();
@@ -17,7 +18,7 @@ describe("StateController.state", () => {
 
         const firstArg = client.emitBroadcast.mock.calls[0][0];
         const secondArg = client.emitBroadcast.mock.calls[0][1];
-        expect(firstArg).toEqual("state");
+        expect(firstArg).toEqual('state');
         expect(secondArg).toMatchObject(state);
     });
 });

@@ -1,15 +1,15 @@
-const StateController = require("../controllers/StateController");
-const RoomController = require("../controllers/RoomController");
+const StateController = require('../controllers/StateController');
+const RoomController = require('../controllers/RoomController');
 
 class WS {
     static getEventHandlers() {
         return [
             {
-                event: "state",
+                event: 'state',
                 handler: StateController.state,
             },
             {
-                event: "room",
+                event: 'room',
                 handler: RoomController.join,
             },
         ];
