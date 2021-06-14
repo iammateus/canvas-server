@@ -1,5 +1,9 @@
-const SocketServer = require("./app/SocketServer");
+require('dotenv').config();
+
+const SocketServer = require('./app/SocketServer');
 
 const socketServer = new SocketServer();
 
-socketServer.server.listen(3000);
+const port = process.env.APP_PORT;
+socketServer.server.listen(port);
+console.log(`App is running on port ${port}`);
