@@ -11,7 +11,7 @@ const SocketServer = require('../../app/SocketServer');
 
 const mockObject = require('../mocks/object.mock');
 
-describe('my beautiful app', () => {
+describe('SocketServer', () => {
     let client;
     let eventName;
     let eventHandler;
