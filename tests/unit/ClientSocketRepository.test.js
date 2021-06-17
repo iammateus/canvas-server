@@ -9,7 +9,7 @@ describe('ClientSocketRepository.emitBroadcast', () => {
     });
 
     it('should emit an event using socket.io client', () => {
-        const client = {
+        const mockSocketClient = {
             broadcast: {
                 emit: jest.fn(),
             },
@@ -17,13 +17,13 @@ describe('ClientSocketRepository.emitBroadcast', () => {
         const event = faker.lorem.word();
         const data = mockObject();
 
-        const clientSocketRepository = new ClientSocketRepository(client);
+        const clientSocketRepository = new ClientSocketRepository(mockSocketClient);
         clientSocketRepository.emitBroadcast(event, data);
 
-        expect(client.broadcast.emit.mock.calls.length).toEqual(1);
+        expect(mockSocketClient.broadcast.emit.mock.calls.length).toEqual(1);
 
-        const firstArg = client.broadcast.emit.mock.calls[0][0];
-        const secondArg = client.broadcast.emit.mock.calls[0][1];
+        const firstArg = mockSocketClient.broadcast.emit.mock.calls[0][0];
+        const secondArg = mockSocketClient.broadcast.emit.mock.calls[0][1];
 
         expect(firstArg).toEqual(event);
         expect(secondArg).toMatchObject(data);

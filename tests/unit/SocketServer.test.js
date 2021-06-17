@@ -53,6 +53,7 @@ describe('SocketServer', () => {
 
             expect(firstArg).toBeInstanceOf(ClientSocketRepository);
             expect(firstArg.client.id).toEqual(client.id);
+
             expect(secondArg).toMatchObject(data);
             done();
         }, 100);
