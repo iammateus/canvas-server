@@ -29,3 +29,25 @@ describe('ClientSocketRepository.emitBroadcast', () => {
         expect(secondArg).toMatchObject(data);
     });
 });
+
+describe('ClientSocketRepository.joinRoom', () => {
+    it('should be a function', () => {
+        const clientSocketRepository = new ClientSocketRepository();
+        expect(clientSocketRepository.emitBroadcast).toBeInstanceOf(Function);
+    });
+
+    it('should put client inside room', () => {
+        const mockSocketClient = {
+            join: jest.fn(),
+        };
+        const roomName = faker.lorem.word();
+
+        const clientSocketRepository = new ClientSocketRepository(mockSocketClient);
+        clientSocketRepository.joinRoom(roomName);
+
+        expect(mockSocketClient.join.mock.calls.length).toEqual(1);
+
+        const firstArg = mockSocketClient.join.mock.calls[0][0];
+        expect(firstArg).toEqual(roomName);
+    });
+});

@@ -1,5 +1,7 @@
 class RoomController {
-    static join(client, roomName) {}
+    static join(clientSocketRepository, roomName) {
+        return clientSocketRepository.joinRoom(roomName);
+    }
 }
 
 module.exports = RoomController;
