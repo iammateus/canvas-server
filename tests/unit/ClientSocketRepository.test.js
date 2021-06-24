@@ -51,3 +51,20 @@ describe('ClientSocketRepository.joinRoom', () => {
         expect(firstArg).toEqual(roomName);
     });
 });
+
+describe('ClientSocketRepository.getRooms', () => {
+    it('should be a function', () => {
+        const clientSocketRepository = new ClientSocketRepository();
+        expect(clientSocketRepository.getRooms).toBeInstanceOf(Function);
+    });
+
+    it('should return clients rooms', () => {
+        const rooms = new Set(faker.lorem.word(), faker.lorem.word());
+        const mockSocketClient = {
+            rooms,
+        };
+
+        const clientSocketRepository = new ClientSocketRepository(mockSocketClient);
+        expect(clientSocketRepository.getRooms()).toMatchObject(rooms);
+    });
+});
