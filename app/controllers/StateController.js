@@ -1,6 +1,6 @@
 class StateController {
     static state(clientSocketRepository, state) {
-        return clientSocketRepository.emitBroadcast('state', state);
+        return clientSocketRepository.emitToRooms('state', state);
     }
 }
 
