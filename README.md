@@ -2,7 +2,7 @@
 
 Multiplayer server of [Canvas App](https://github.com/iammateus/Canvas).
 
-This application uses WebSockets to provide real-time communication between its clients. This communication enables users to draw collaboratively in a canvas.
+This application uses [Socket.io](https://socket.io/) to provide real-time communication between its clients. This communication enables users to draw collaboratively in an online whiteboard.
 
 ## Requeriments
 
