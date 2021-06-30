@@ -7,7 +7,6 @@ class ClientSocketRepository {
         return this.client.broadcast.emit(event, data);
     }
 
-    // @TODO: create unit test this function
     emitToRooms(event, data) {
         this.getRooms().forEach((room) => {
             this.client.to(room).emit(event, data);

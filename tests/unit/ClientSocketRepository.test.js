@@ -58,13 +58,44 @@ describe('ClientSocketRepository.getRooms', () => {
         expect(clientSocketRepository.getRooms).toBeInstanceOf(Function);
     });
 
-    it('should return clients rooms', () => {
-        const rooms = new Set(faker.lorem.word(), faker.lorem.word());
+    it('should return client\'s rooms', () => {
+        const rooms = new Set([faker.lorem.word(), faker.lorem.word()]);
         const mockSocketClient = {
             rooms,
         };
 
         const clientSocketRepository = new ClientSocketRepository(mockSocketClient);
         expect(clientSocketRepository.getRooms()).toMatchObject(rooms);
+    });
+});
+
+describe('ClientSocketRepository.emitToRooms', () => {
+    it('should be a function', () => {
+        const clientSocketRepository = new ClientSocketRepository();
+        expect(clientSocketRepository.emitToRooms).toBeInstanceOf(Function);
+    });
+
+    it('should emit event to client\'s rooms', () => {
+        const room1 = faker.lorem.word();
+        const room2 = faker.lorem.word();
+        const rooms = new Set([room1, room2]);
+        const mockSocketClient = {
+            rooms,
+        };
+        mockSocketClient.to = jest.fn().mockReturnValue(mockSocketClient);
+        mockSocketClient.emit = jest.fn().mockReturnValue(mockSocketClient);
+        const event = faker.lorem.word();
+        const data = mockObject();
+
+        const clientSocketRepository = new ClientSocketRepository(mockSocketClient);
+        clientSocketRepository.emitToRooms(event, data);
+
+        expect(mockSocketClient.to).toHaveBeenCalledTimes(2);
+        expect(mockSocketClient.to).toHaveBeenNthCalledWith(1, room1);
+        expect(mockSocketClient.to).toHaveBeenNthCalledWith(2, room2);
+
+        expect(mockSocketClient.emit).toHaveBeenCalledTimes(2);
+        expect(mockSocketClient.emit).toHaveBeenNthCalledWith(1, event, data);
+        expect(mockSocketClient.emit).toHaveBeenNthCalledWith(2, event, data);
     });
 });
