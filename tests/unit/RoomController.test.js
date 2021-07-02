@@ -11,7 +11,7 @@ describe('StateController.state', () => {
 
     it('should join client to a given room', () => {
         const clientSocketRepository = new ClientSocketRepository();
-        clientSocketRepository.joinRoom.mockImplementationOnce(() => {});
+        clientSocketRepository.joinRoom = jest.fn();
 
         const roomName = faker.lorem.word();
         RoomController.join(clientSocketRepository, roomName);
