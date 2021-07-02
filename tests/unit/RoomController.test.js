@@ -15,9 +15,7 @@ describe('StateController.state', () => {
 
         const roomName = faker.lorem.word();
         RoomController.join(clientSocketRepository, roomName);
-        expect(clientSocketRepository.joinRoom.mock.calls.length).toEqual(1);
-
-        const firstArg = clientSocketRepository.joinRoom.mock.calls[0][0];
-        expect(firstArg).toEqual(roomName);
+        expect(clientSocketRepository.joinRoom).toHaveBeenCalledTimes(1);
+        expect(clientSocketRepository.joinRoom).toHaveBeenCalledWith(roomName);
     });
 });
