@@ -2,7 +2,7 @@ const StateController = require('../../app/controllers/StateController');
 const ClientSocketRepository = require('../../app/repositories/gateways/socket.io/ClientSocketRepository');
 
 jest.mock('../../app/repositories/gateways/socket.io/ClientSocketRepository');
-const mockObject = require('../mocks/object.mock');
+const ObjectMock = require('../mocks/ObjectMock');
 
 describe('StateController.state', () => {
     it('should be a function', () => {
@@ -13,7 +13,7 @@ describe('StateController.state', () => {
         const clientSocketRepository = new ClientSocketRepository();
         clientSocketRepository.emitToRooms = jest.fn();
 
-        const state = mockObject();
+        const state = ObjectMock.mock();
         StateController.state(clientSocketRepository, state);
         expect(clientSocketRepository.emitToRooms).toHaveBeenCalledTimes(1);
         expect(clientSocketRepository.emitToRooms).toHaveBeenCalledWith('state', state);

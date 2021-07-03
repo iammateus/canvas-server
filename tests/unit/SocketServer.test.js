@@ -9,7 +9,7 @@ const ClientSocketRepository = require('../../app/repositories/gateways/socket.i
 
 const SocketServer = require('../../app/SocketServer');
 
-const mockObject = require('../mocks/object.mock');
+const ObjectMock = require('../mocks/ObjectMock');
 
 describe('SocketServer', () => {
     let client;
@@ -41,7 +41,7 @@ describe('SocketServer', () => {
     });
 
     it('should call correct handler for event with right params (object)', () => new Promise((done) => {
-        const data = mockObject();
+        const data = ObjectMock.mock();
 
         client.emit(eventName, data);
 

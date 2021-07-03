@@ -1,6 +1,6 @@
 const faker = require('faker');
 const ClientSocketRepository = require('../../app/repositories/gateways/socket.io/ClientSocketRepository');
-const mockObject = require('../mocks/object.mock');
+const ObjectMock = require('../mocks/ObjectMock');
 
 describe('ClientSocketRepository.emitBroadcast', () => {
     it('should be a function', () => {
@@ -15,7 +15,7 @@ describe('ClientSocketRepository.emitBroadcast', () => {
             },
         };
         const event = faker.lorem.word();
-        const data = mockObject();
+        const data = ObjectMock.mock();
 
         const clientSocketRepository = new ClientSocketRepository(mockSocketClient);
         clientSocketRepository.emitBroadcast(event, data);
@@ -77,7 +77,7 @@ describe('ClientSocketRepository.emitToRooms', () => {
         mockSocketClient.to = jest.fn().mockReturnValue(mockSocketClient);
         mockSocketClient.emit = jest.fn().mockReturnValue(mockSocketClient);
         const event = faker.lorem.word();
-        const data = mockObject();
+        const data = ObjectMock.mock();
 
         const clientSocketRepository = new ClientSocketRepository(mockSocketClient);
         clientSocketRepository.emitToRooms(event, data);
