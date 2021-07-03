@@ -46,7 +46,7 @@ describe('SocketServer', () => {
         client.emit(eventName, data);
 
         setTimeout(() => {
-            expect(eventHandler.mock.calls.length).toEqual(1);
+            expect(eventHandler).toHaveBeenCalledTimes(1);
 
             const firstArg = eventHandler.mock.calls[0][0];
             const secondArg = eventHandler.mock.calls[0][1];
@@ -65,7 +65,7 @@ describe('SocketServer', () => {
         client.emit(eventName, data);
 
         setTimeout(() => {
-            expect(eventHandler.mock.calls.length).toEqual(2);
+            expect(eventHandler).toHaveBeenCalledTimes(2);
 
             const firstArg = eventHandler.mock.calls[1][0];
             const secondArg = eventHandler.mock.calls[1][1];
