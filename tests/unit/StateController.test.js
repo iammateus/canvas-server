@@ -11,15 +11,11 @@ describe('StateController.state', () => {
 
     it('should emit state event', () => {
         const clientSocketRepository = new ClientSocketRepository();
-        clientSocketRepository.emitToRooms.mockImplementationOnce(() => {});
+        clientSocketRepository.emitToRooms = jest.fn();
 
         const state = mockObject();
         StateController.state(clientSocketRepository, state);
-        expect(clientSocketRepository.emitToRooms.mock.calls.length).toEqual(1);
-
-        const firstArg = clientSocketRepository.emitToRooms.mock.calls[0][0];
-        const secondArg = clientSocketRepository.emitToRooms.mock.calls[0][1];
-        expect(firstArg).toEqual('state');
-        expect(secondArg).toMatchObject(state);
+        expect(clientSocketRepository.emitToRooms).toHaveBeenCalledTimes(1);
+        expect(clientSocketRepository.emitToRooms).toHaveBeenCalledWith('state', state);
     });
 });
