@@ -4,7 +4,7 @@ class ClientSocketRepository {
     }
 
     emitBroadcast(event, data) {
-        return this.client.broadcast.emit(event, data);
+        this.client.broadcast.emit(event, data);
     }
 
     emitToRooms(event, data) {
@@ -14,7 +14,7 @@ class ClientSocketRepository {
     }
 
     joinRoom(roomName) {
-        return this.client.join(roomName);
+        this.client.join(roomName);
     }
 
     getRooms() {

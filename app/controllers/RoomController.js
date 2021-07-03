@@ -1,6 +1,6 @@
 class RoomController {
     static join(clientSocketRepository, roomName) {
-        return clientSocketRepository.joinRoom(roomName);
+        clientSocketRepository.joinRoom(roomName);
     }
 }
 
