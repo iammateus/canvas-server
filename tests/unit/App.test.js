@@ -2,20 +2,18 @@ const faker = require('faker');
 const Client = require('socket.io-client');
 
 const WS = require('../../app/ports/WS');
-
 jest.mock('../../app/ports/WS');
 
 const ClientSocketRepository = require('../../app/repositories/gateways/socket.io/ClientSocketRepository');
-
-const SocketServer = require('../../app/SocketServer');
+const App = require('../../app/App');
 
 const ObjectMock = require('../mocks/ObjectMock');
 
-describe('SocketServer', () => {
+describe('App', () => {
     let client;
     let eventName;
     let eventHandler;
-    let socketServer;
+    let app;
 
     beforeAll(() => new Promise((done) => {
         // Mock event and its handler
@@ -26,17 +24,17 @@ describe('SocketServer', () => {
         ]);
 
         // Init socket server
-        socketServer = new SocketServer();
+        app = new App();
 
-        socketServer.server.listen(() => {
-            const { port } = socketServer.server.address();
+        app.server.listen(() => {
+            const { port } = app.server.address();
             client = new Client(`http://localhost:${port}`);
             client.on('connect', done);
         });
     }));
 
     afterAll(() => {
-        socketServer.io.close();
+        app.io.close();
         client.close();
     });
 
