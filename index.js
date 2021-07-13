@@ -1,8 +1,14 @@
 require('dotenv').config();
 const logger = require('./app/utils/logger');
-const SocketServer = require('./app/SocketServer');
+const App = require('./app/App');
 
-const socketServer = new SocketServer();
-const port = process.env.APP_PORT;
-socketServer.server.listen(port);
-logger.info(`App is running on port ${port}`);
+class Main {
+    static main() {
+        const app = new App();
+        const port = process.env.APP_PORT;
+        app.server.listen(port);
+        logger.info(`App is running on port ${port}`);
+    }
+}
+
+Main.main();
