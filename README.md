@@ -1,3 +1,4 @@
+
 # Canvas Server
 
 Multiplayer server of [Canvas App](https://github.com/iammateus/Canvas).
@@ -11,6 +12,13 @@ This application uses [Socket.io](https://socket.io/) to provide real-time commu
 ## Installation
 
     $ docker-compose up
+    
+## Environment variables
+
+|Name| Description |
+|--------|--|
+|APP_PORT| The port of the Application |
+ 
 
 ## Test
 
