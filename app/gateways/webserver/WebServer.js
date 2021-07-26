@@ -1,7 +1,7 @@
 const { createServer } = require('http');
 
 class WebServer {
-    static initServer() {
+    static create() {
         return createServer();
     }
 }
