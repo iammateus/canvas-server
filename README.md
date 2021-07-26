@@ -1,9 +1,9 @@
 
 # Canvas Server
 
-The multiplayer server of [Canvas App](https://github.com/iammateus/Canvas).
+The multiplayer server of [Canvas App](https://github.com/iammateus/canvas-app).
 
-This application uses [Socket.io](https://socket.io/) to provide real-time communication between its clients. This communication enables users to draw collaboratively in an online whiteboard.
+This application uses [Socket.io](https://socket.io/) to provide real-time communication between its clients. This communication enables users to draw collaboratively on an online whiteboard.
 
 ## Requeriments
 
