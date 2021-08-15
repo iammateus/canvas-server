@@ -19,3 +19,8 @@ services:
             - bootstrap
         ports:
             - "3000:3000"
+    
+    redis:
+        image: redis
+        expose:
+            - 6379
