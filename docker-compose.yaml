@@ -17,6 +17,7 @@ services:
             - .:/app
         depends_on:
             - bootstrap
+            - redis
         ports:
             - "3000:3000"
     

@@ -18,6 +18,8 @@ This application uses [Socket.io](https://socket.io/) to provide real-time commu
 |Name| Description |
 |--------|--|
 |APP_PORT| The port of the Application |
+|DB_HOST| The host of the database |
+|DB_PORT| The port of the database |
  
 
 ## Test
