@@ -2,6 +2,7 @@ const faker = require('faker');
 const Client = require('socket.io-client');
 
 const WS = require('../../app/ports/WS');
+
 jest.mock('../../app/ports/WS');
 
 const ClientSocketRepository = require('../../app/repositories/gateways/socket.io/ClientSocketRepository');
