@@ -1,4 +1,6 @@
 const socket = require('socket.io');
+const { createAdapter } = require('@socket.io/redis-adapter');
+const { createClient } = require('redis');
 const ClientSocketRepository = require('../../repositories/gateways/socket.io/ClientSocketRepository');
 
 class SocketIO {
@@ -6,12 +8,13 @@ class SocketIO {
         const config = {
             cors: {
                 origin: '*',
+                methods: ['GET', 'POST'],
             },
         };
 
         const io = socket(server, config);
         this.registrerHandlers(io, eventHandlers);
-
+        this.setAdapter(io);
         return io;
     }
 
@@ -24,6 +27,12 @@ class SocketIO {
                 });
             });
         });
+    }
+
+    static setAdapter(io) {
+        const pubClient = createClient({ host: 'redis', port: 6379 });
+        const subClient = pubClient.duplicate();
+        io.adapter(createAdapter(pubClient, subClient));
     }
 }
 

@@ -10,6 +10,8 @@ const App = require('../../app/App');
 
 const ObjectMock = require('../mocks/ObjectMock');
 
+const SocketIO = require('../../app/gateways/socket.io/SocketIO');
+
 describe('App', () => {
     let client;
     let eventName;
@@ -17,6 +19,9 @@ describe('App', () => {
     let app;
 
     beforeAll(() => new Promise((done) => {
+        // Mock adapter setup
+        jest.spyOn(SocketIO, 'setAdapter').mockImplementationOnce(() => null);
+
         // Mock event and its handler
         eventName = faker.lorem.word();
         eventHandler = jest.fn();
