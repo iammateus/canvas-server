@@ -1,6 +1,8 @@
+const logger = require('../utils/logger');
+
 class StateController {
     static state(clientSocketRepository, state) {
-        console.log('event received');
+        logger.info('StateController.state - Event received');
         clientSocketRepository.emitToRooms('state', state);
     }
 }
