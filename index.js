@@ -6,7 +6,7 @@ class Main {
     static main() {
         const app = new App();
         const port = process.env.APP_PORT;
-        app.server.listen(port);
+        app.webServer.listen(port);
         logger.info(`App is running on port ${port}`);
     }
 }

@@ -16,6 +16,6 @@ describe('StateController.state', () => {
         const state = ObjectMock.mock();
         StateController.state(clientSocketRepository, state);
         expect(clientSocketRepository.emitToRooms).toHaveBeenCalledTimes(1);
-        expect(clientSocketRepository.emitToRooms).toHaveBeenCalledWith('state', state);
+        expect(clientSocketRepository.emitToRooms).toHaveBeenCalledWith('ChangeState', state);
     });
 });
