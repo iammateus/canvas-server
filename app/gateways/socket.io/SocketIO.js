@@ -30,7 +30,7 @@ class SocketIO {
     }
 
     static setAdapter(io) {
-        const pubClient = createClient({ host: 'redis' });
+        const pubClient = createClient({ host: process.env.DB_HOST });
         const subClient = pubClient.duplicate();
         io.adapter(createAdapter(pubClient, subClient));
     }
