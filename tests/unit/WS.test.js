@@ -7,13 +7,13 @@ describe('WS.getEventHandlers', () => {
         expect(WS.getEventHandlers).toBeInstanceOf(Function);
     });
 
-    it('should have "state" event handler', () => {
+    it('should have "ChangeState" event handler', () => {
         const handler = WS.getEventHandlers().find((item) => item.event === 'ChangeState');
         expect(handler).toBeTruthy();
         expect(handler.handler).toBe(StateController.state);
     });
 
-    it('should have "room" event handler', () => {
+    it('should have "JoinRoom" event handler', () => {
         const handler = WS.getEventHandlers().find((item) => item.event === 'JoinRoom');
         expect(handler).toBeTruthy();
         expect(handler.handler).toBe(RoomController.join);
