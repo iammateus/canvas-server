@@ -13,6 +13,9 @@ This application uses [Socket.io](https://socket.io/) to provide real-time commu
 
     $ docker-compose up
     
+    # test with more than one instance
+    $ docker-compose up --scale server=3
+    
 ## Environment variables
 
 |Name| Description |
