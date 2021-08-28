@@ -32,8 +32,8 @@ describe('App', () => {
         // Init socket server
         app = new App();
 
-        app.server.listen(() => {
-            const { port } = app.server.address();
+        app.webServer.listen(() => {
+            const { port } = app.webServer.address();
             client = new Client(`http://localhost:${port}`);
             client.on('connect', done);
         });

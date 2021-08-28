@@ -4,8 +4,8 @@ const WS = require('./ports/WS');
 
 class App {
     constructor() {
-        this.server = WebServer.create();
-        this.io = SocketIO.init(this.server, WS.getEventHandlers());
+        this.webServer = WebServer.create();
+        this.io = SocketIO.init(this.webServer, WS.getEventHandlers());
     }
 }
 

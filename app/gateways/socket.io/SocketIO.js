@@ -4,7 +4,7 @@ const { createClient } = require('redis');
 const ClientSocketRepository = require('../../repositories/gateways/socket.io/ClientSocketRepository');
 
 class SocketIO {
-    static init(server, eventHandlers) {
+    static init(webServer, eventHandlers) {
         const config = {
             cors: {
                 origin: '*',
@@ -12,7 +12,7 @@ class SocketIO {
             },
         };
 
-        const io = socket(server, config);
+        const io = socket(webServer, config);
         this.registrerHandlers(io, eventHandlers);
         this.setAdapter(io);
         return io;
