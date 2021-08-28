@@ -5,11 +5,11 @@ class WS {
     static getEventHandlers() {
         return [
             {
-                event: 'state',
+                event: 'ChangeState',
                 handler: StateController.state,
             },
             {
-                event: 'room',
+                event: 'JoinRoom',
                 handler: RoomController.join,
             },
         ];

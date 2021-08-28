@@ -8,13 +8,13 @@ describe('WS.getEventHandlers', () => {
     });
 
     it('should have "state" event handler', () => {
-        const handler = WS.getEventHandlers().find((item) => item.event === 'state');
+        const handler = WS.getEventHandlers().find((item) => item.event === 'ChangeState');
         expect(handler).toBeTruthy();
         expect(handler.handler).toBe(StateController.state);
     });
 
     it('should have "room" event handler', () => {
-        const handler = WS.getEventHandlers().find((item) => item.event === 'room');
+        const handler = WS.getEventHandlers().find((item) => item.event === 'JoinRoom');
         expect(handler).toBeTruthy();
         expect(handler.handler).toBe(RoomController.join);
     });
